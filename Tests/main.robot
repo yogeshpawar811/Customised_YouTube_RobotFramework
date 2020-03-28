@@ -11,9 +11,18 @@ Get Data From User
     [Documentation]  Get Data From User
     [Tags]  Validation
     ${age_returned}  Get_Selection.Check User Age
+
+    ${categ_returned}  Run Keyword If  '${age_returned}' == '0 year - 2 year'  Get_Selection.Check Chield Categ
+    ${categ_returned}  Run Keyword If  '${age_returned}' == '2 year - 5 year'  Get_Selection.Check Chield Categ
     ${mood_returned}  Run Keyword If  '${age_returned}' == '10 year - 15 year'  Get_Selection.Check User Mood
+
+
     @{age_range_and_mood}   Set Variable   ${age_returned}   ${mood_returned}
+
+
+
     ${Returned_Dict}  Video_Dictionary.Get Video Links    @{age_range_and_mood}
+
     Create Webdriver    Chrome    executable_path=C:/Paid_Project/ytapi/bin/chromedriver.exe
 #    Open Browser  about:blank  gc
 #    Wait Until Keyword Succeeds  10s
